@@ -4,14 +4,15 @@ Hashmask Stats is a script that calculates recent Hashmask trade price stats. It
 
 ## Installation
 
-Clone repository. Then:
-Run `npm install web3` and `npm install dotenv`
+Clone repository. Then,<br>
+Run `npm install web3`<br>`npm install dotenv`
 
 ## Usage
 
-Create .env file with a single entry: `INFURA_URL`, and set the variable to your Infura (infura.io) mainnet url.
+Create file named `.env` with a single line: `INFURA_URL="<your Infura URL>"`<br>where `<your Infura URL>` is set to your Infura (infura.io) mainnet url.<br><br>
+Set `N` variable to the number of days you want to look back (set to 2 days by default).
 
-Then,
+Then run<br>
 `node index.js`
 
 
