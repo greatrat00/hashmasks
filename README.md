@@ -5,7 +5,7 @@ Hashmask Stats is a script that calculates recent Hashmask trade price stats. It
 ## Installation
 
 Clone repository. Then,<br>
-Run `npm install web3`<br>`npm install dotenv`
+Run<br>`npm install web3`<br>&<br>`npm install dotenv`
 
 ## Usage
 
