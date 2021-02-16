@@ -6,17 +6,36 @@ const web3 = new Web3(Web3.givenProvider || process.env.INFURA_URL);
 // Instantiate Hashmasks Token Contract
 const hmTokenContract = new web3.eth.Contract(hmABI, '0xC2C747E0F7004F9E8817Db2ca4997657a7746928');
 
-// Get block ~N days ago
-const N = 0.5; // N days ago
-const blocksBack = (N * 6422) | 0; // 6422 approx blocks per day
+// Build time chunks
+const N = 1; // Resolution in days
+const resolution = N * 6422 | 0; // number of blocks for given resolution (approx)
+
+let averages = [];
+let mins = [];
+let maxs = [];
+let winners = [];
 
 (async () => {
-    await web3.eth.getBlockNumber().then(data => {
+    await web3.eth.getBlockNumber().then(async data => {
         let currentBlockHeight = data;
-        let startBlock = currentBlockHeight - blocksBack;
+
+        const genesis = 11779000; // approximate genesis of Hashmask trading
+        const dif = currentBlockHeight - genesis;
+        let res_back = dif/resolution;
+        res_back = res_back.toFixed(0);
+        let _fromBlock = currentBlockHeight - res_back * resolution;
+        let _toBlock = _fromBlock + resolution;
+
+        console.log(_fromBlock);
+        console.log(_toBlock);
+        
+        while ((_toBlock + resolution) < (currentBlockHeight + 500)) { // add some wiggle room to go a little beyond current block
+
+            _fromBlock = _toBlock;
+            _toBlock += resolution;
 
         const init = async () => {
-            await hmTokenContract.getPastEvents("Transfer", { fromBlock: startBlock }).then(async (events) => {
+            await hmTokenContract.getPastEvents("Transfer", { fromBlock: _fromBlock, toBlock: _toBlock }).then(async (events) => {
                 const count = events.length;
                 let event, transactionHash;
                 let max = 0, min = 10e18, suma = 0, total = 0, championTokenId = 0;
@@ -46,17 +65,29 @@ const blocksBack = (N * 6422) | 0; // 6422 approx blocks per day
 
                 const avg = suma / total;
 
-                console.log('\n\nRESULTS:\n');
+                console.log(`\n\nRESULTS from block ${_fromBlock} to ${_toBlock}:\n`);
                 console.log(`Min paid: ${min} ETH`);
                 console.log(`Max paid: ${max} ETH`);
                 console.log(`Avg paid: ${avg} ETH`);
                 console.log(`Most expensive token: ${championTokenId}\n`);
 
+                averages.push(avg);
+                mins.push(min);
+                maxs.push(max);
+                winners.push(championTokenId);
+
+
             });
 
         };
 
-        init();
+        await init();
+    }
+
+    console.log(mins);
+    console.log(maxs);
+    console.log(averages);
+    console.log(winners);
 
     })
 })()
