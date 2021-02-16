@@ -7,7 +7,7 @@ const web3 = new Web3(Web3.givenProvider || process.env.INFURA_URL);
 const hmTokenContract = new web3.eth.Contract(hmABI, '0xC2C747E0F7004F9E8817Db2ca4997657a7746928');
 
 // Get block ~N days ago
-const N = 0.5; // N days ago
+const N = 1; // N days ago
 const blocksBack = (N * 6422) | 0; // 6422 approx blocks per day
 
 (async () => {

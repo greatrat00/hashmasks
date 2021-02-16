@@ -14,6 +14,7 @@ let averages = [];
 let mins = [];
 let maxs = [];
 let winners = [];
+let times = [];
 
 (async () => {
     await web3.eth.getBlockNumber().then(async data => {
