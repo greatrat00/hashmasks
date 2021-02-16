@@ -13,8 +13,8 @@ Create file named `.env` with a single line: `INFURA_URL="<your Infura URL>"`<br
 Set `N` variable to the number of days you want to look back (set to 2 days by default).
 
 Then run<br>
-`node index.js`\n
-or\n
+`node index.js`<br>
+or<br>
 `node daily.js`
 
 
