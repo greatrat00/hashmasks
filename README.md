@@ -12,7 +12,7 @@ Clone repository. Then,<br><br>
 Create file named `.env` with a single line: `INFURA_URL="<your Infura URL>"`<br>where `<your Infura URL>` is set to your Infura (infura.io) mainnet url.<br><br>
 Set `N` variable to the number of days you want to look back (set to 2 days by default).
 
-Next,<br>
+Next,<br><br>
 `node index.js` for last 24 hours stats<br>
 or<br>
 `node daily.js` for daily stats since ~genesis of Hashmasks trading
