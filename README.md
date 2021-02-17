@@ -10,7 +10,7 @@ Clone repository. Then,<br><br>
 ## Usage
 
 Create file named `.env` with a single line: `INFURA_URL="<your Infura URL>"`<br>where `<your Infura URL>` is set to your Infura (infura.io) mainnet url.<br><br>
-Set `N` variable to the number of days you want to look back (set to 2 days by default).
+Set `N` variable in `index.js` to the number of days you want to look back (set to 1 day by default).
 
 Next,<br><br>
 `node index.js` for last 24 hours stats<br>
