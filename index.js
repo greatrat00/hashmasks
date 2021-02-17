@@ -15,6 +15,8 @@ const blocksBack = (N * 6422) | 0; // 6422 approx blocks per day
         let currentBlockHeight = data;
         let startBlock = currentBlockHeight - blocksBack;
 
+        console.log(startBlock);
+
         const init = async () => {
             await hmTokenContract.getPastEvents("Transfer", { fromBlock: startBlock }).then(async (events) => {
                 const count = events.length;

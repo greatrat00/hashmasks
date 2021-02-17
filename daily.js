@@ -26,9 +26,6 @@ let times = [];
         res_back = res_back.toFixed(0);
         let _fromBlock = currentBlockHeight - res_back * resolution;
         let _toBlock = _fromBlock + resolution;
-
-        console.log(_fromBlock);
-        console.log(_toBlock);
         
         while ((_toBlock + resolution) < (currentBlockHeight + 500)) { // add some wiggle room to go a little beyond current block
 
